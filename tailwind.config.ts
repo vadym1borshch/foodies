@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { PluginAPI } from 'tailwindcss/types/config';
 
 const config: Config = {
   content: [
@@ -9,12 +10,43 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'gradient-to-r': 'linear-gradient(90deg, #d97706, #92400e)',
       },
+      textShadow: {
+        'custom': '0 0 18px rgba(248, 190, 42, 0.8)',
+      },
+      clipPath: {
+        'custom-shape': 'polygon(0 0, 100% 0, 100% 75%, 0 100%)',
+      },
+      colors: {
+        main: 'linear-gradient(90deg, #fde68a, #fbbf24)',
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: PluginAPI) {
+      addUtilities({
+        '.bg-clip-text': {
+          'background-clip': 'text',
+          '-webkit-background-clip': 'text',
+        },
+        '.text-fill-transparent': {
+          '-webkit-text-fill-color': 'transparent',
+        },
+        '.text-gradient': {
+          'background': 'linear-gradient(90deg, #fef08a, #facc15)',
+          'background-clip': 'text',
+          '-webkit-background-clip': 'text',
+          '-webkit-text-fill-color': 'transparent',
+        },
+        '.text-shadow': {
+          'text-shadow': '0 0 18px rgba(248, 190, 42, 0.8)',
+        },
+        '.bg-gradient': {
+          'background-image': 'linear-gradient(90deg,  #d97706, #92400e)',
+        },
+      });
+    }
+  ],
 };
 export default config;
