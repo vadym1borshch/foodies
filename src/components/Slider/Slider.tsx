@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { images } from '@/assets/images'
+import { sliderImages } from '@/assets/images'
 import Image from 'next/image'
 
 interface ISliderProps {
@@ -12,7 +12,7 @@ const Slider: React.FC<ISliderProps> = ({}) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % sliderImages.length)
     }, 5000)
 
     return () => clearInterval(interval)
@@ -20,12 +20,12 @@ const Slider: React.FC<ISliderProps> = ({}) => {
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1,
+      prevIndex === 0 ? sliderImages.length - 1 : prevIndex - 1,
     )
   }
 
   const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % sliderImages.length)
   }
 
   const goToSlide = (index: number) => {
@@ -39,11 +39,11 @@ const Slider: React.FC<ISliderProps> = ({}) => {
           className="flex transition-transform duration-700"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {images.map((src, index) => (
+          {sliderImages.map((item) => (
             <Image
-              key={index}
-              src={src}
-              alt={`Slide ${index}`}
+              key={item.id}
+              src={item.img}
+              alt={item.alt}
               className="w-full"
             />
           ))}
@@ -62,7 +62,7 @@ const Slider: React.FC<ISliderProps> = ({}) => {
         </button>
       </div>
       <div className="flex justify-center mt-2">
-        {images.map((_, index) => (
+        {sliderImages.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}

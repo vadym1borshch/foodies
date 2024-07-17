@@ -7,10 +7,10 @@ interface IReduxWrapperProps {
   children: React.ReactNode
 }
 
-const ReduxWrapper: React.FC<IReduxWrapperProps> = ({children}) => {
+const ReduxWrapper: React.FC<IReduxWrapperProps> = ({ children }) => {
   return (
     <Provider store={store}>
-      {children}
+      <div className="flex-grow overflow-auto my-6">{children}</div>
     </Provider>
   )
 }

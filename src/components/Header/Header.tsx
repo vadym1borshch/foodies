@@ -8,7 +8,7 @@ interface IHeaderProps {
 
 const Header: React.FC<IHeaderProps> = ({}) => {
   return (
-    <header className="header flex justify-between items-center w-full ">
+    <header className="flex flex-shrink-0  justify-between items-center w-full h-[100px]">
       <div className="flex px-4">
         <NavLink href="/" img={logo}>
           NEXT LEVEL FOOD

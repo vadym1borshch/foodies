@@ -6,7 +6,6 @@ import ReduxWrapper from '@/components/ReduxWrapper/ReduxWrapper'
 import Background from '@/components/Background/Background'
 import Header from '@/components/Header/Header'
 
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -15,19 +14,19 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-                                     children,
-                                   }: Readonly<{
-  children: ReactNode;
+  children,
+}: Readonly<{
+  children: ReactNode
 }>) {
   return (
     <html lang="en">
-    <body className={inter.className}>
-    <Background/>
-    <Header/>
-    <ReduxWrapper>
-      {children}
-    </ReduxWrapper>
-    </body>
+      <body className={inter.className}>
+        <div className="h-screen flex flex-col z-0" >
+          <Background />
+          <Header />
+          <ReduxWrapper>{children}</ReduxWrapper>
+        </div>
+      </body>
     </html>
   )
 }

@@ -8,7 +8,7 @@ interface INavLinkProps {
   img?: string | StaticImageData
   children: React.ReactNode
   href: string
-  activeLinkBackgroundColor?: boolean
+  backgroundColor?: boolean
   textColor?: boolean
 }
 
@@ -16,8 +16,8 @@ const NavLink: React.FC<INavLinkProps> = ({
   img,
   children,
   href,
-  activeLinkBackgroundColor,
-  textColor
+  backgroundColor,
+  textColor,
 }) => {
   const pathName = usePathname()
 
@@ -37,7 +37,9 @@ const NavLink: React.FC<INavLinkProps> = ({
       href={href}
     >
       {img && <Image src={img} alt={''} priority width={100} height={100} />}
-      <span className={`${activeLinkBackgroundColor ? 'bg-gradient rounded p-2' : ''} ${textColor? 'text-gradient' : "text-white"}`}>
+      <span
+        className={`${backgroundColor ? 'bg-gradient rounded p-2' : ''} ${textColor ? 'text-gradient' : 'text-white'}`}
+      >
         {children}
       </span>
     </Link>
