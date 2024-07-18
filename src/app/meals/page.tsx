@@ -1,29 +1,16 @@
 import React, { Suspense } from 'react'
-import NavLink from '@/components/NavLink/NavLink'
-import sql from 'better-sqlite3'
+
 import MealsGrid from '@/app/meals/MealsGrid/MealsGrid'
+import SimplyLoader from '@/components/Loaders/SimplyLoader'
+import { getMeals } from '@/app/meals/getters/getFunctions'
+import NavLink from '@/components/NavLink/NavLink'
 
 interface IMealsProps {
   // define your props here
 }
 
-export interface IMealsResponse {
-  creator: string
-  creator_email: string
-  id: number
-  image: string
-  instructions: string
-  slug: string
-  summary: string
-  title: string
-}
 
-const db = sql('meals.db')
 
-const getMeals = async () => {
-  await new Promise(async (resolve) => setTimeout(resolve, 5000))
-  return db.prepare('SELECT * FROM meals').all() as unknown as IMealsResponse[]
-}
 
 const Meals = async () => {
   const meals = await getMeals()
@@ -46,13 +33,14 @@ const MealsPage: React.FC<IMealsProps> = ({}) => {
         <NavLink href="/meals/share" backgroundColor>
           Share Your Favorite recipe
         </NavLink>
-        <div className="flex gap-10 flex-wrap justify-start">
-          <Suspense fallback={<p>Loading...</p>}>
+        <div className="flex flex-col items-center justify-center w-full">
+          <Suspense fallback={<SimplyLoader>Loading...</SimplyLoader>}>
             <Meals />
           </Suspense>
         </div>
       </main>
     </div>
+
   )
 }
 
